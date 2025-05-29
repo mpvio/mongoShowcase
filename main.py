@@ -31,7 +31,8 @@ def createDatabase():
 
     #insert many:
     users = [
-        {"name": "def", "age": 50},
+        # documents don't need to be uniform, as with relational DBs
+        {"name": "def", "age": 50, "bonus": "bonus"},
         {"name": "ghi", "age": 25}
     ]
     y = collection.insert_many(users)
