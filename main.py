@@ -39,12 +39,14 @@ def createDatabase():
 
     #insert document(s) with specified id
     #ids must be unique
-    try:
-        userId = {"_id": 10, "name": "jkl", "age": 200}
+    idToFind = 12
+    idExists = collection.count_documents({"_id": idToFind}) != 0
+    if not idExists:
+        userId = {"_id": idToFind, "name": "jkl", "age": 200}
         z = collection.insert_one(userId)
         print("user with pre-defined ID:", z.inserted_id)
-    except:
-        print("user with given _id already exists")
+    else:
+        print(f"user with given _id ({idToFind}) already exists")
 
 def findDataAndLimitResults():
     client = pymongo.MongoClient(connectionString)
@@ -152,3 +154,5 @@ def dropCollection():
     # can drop a collection with .drop()
     # returns true if successful, false if not (collection doesn't exist)
     coll.drop()
+
+createDatabase()
